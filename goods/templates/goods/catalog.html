@@ -58,9 +58,12 @@
                 {% endif %}
                 <div class="card-body">
                     <a href="{% url "catalog:product" product.slug %}">
-                        <p class="card-title">{{ product.name }}</p>
+                        <p class="card-title"> {% autoescape off %}{% if product.headline %}{{ product.headline }}{% else %}{{ product.name }}{% endif %}{% endautoescape %}</p>
                     </a>
-                    <p class="card-text">{{ product.description|truncatechars:35 }}</p>
+                    <p class="card-text">
+                        <p class="card-title"> {% autoescape off %}{% if product.bodyline %}{{ product.bodyline|truncatechars:100 }}{% else %}{{ product.description|truncatechars:100 }}{% endif %}{% endautoescape %}</p>
+
+                    </p>
                     <p class="product_id">{{ product.display_id }}</p>
                     <div class="d-flex justify-content-between">
                         {% if product.discount %}
